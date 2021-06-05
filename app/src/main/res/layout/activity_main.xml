@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/fragment3"
-        android:name="cat.inspedralbes.projecte2damb.portafolio.fragments.HomeFragment"
+        android:id="@+id/fragment"
+        android:name="cat.inspedralbes.projecte2damb.portafolio.openweatherapi.ui.OpenWeatherFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

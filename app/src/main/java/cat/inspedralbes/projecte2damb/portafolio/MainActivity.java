@@ -12,9 +12,15 @@ import android.view.WindowManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import cat.inspedralbes.projecte2damb.portafolio.openweatherapi.ui.OpenWeatherFragment;
+import cat.inspedralbes.projecte2damb.portafolio.util.constants.Constants;
+
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
+
+    // Fragments
+    OpenWeatherFragment openWeatherFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        openWeatherFragment = new OpenWeatherFragment();
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(this::onClick);

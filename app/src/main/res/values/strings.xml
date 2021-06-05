@@ -102,4 +102,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type_a_city_name">Type a city name</string>
+    <string name="city_name">City name</string>
+    <string name="weather_info">Weather Forecast</string>
 </resources>
