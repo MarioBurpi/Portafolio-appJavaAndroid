@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
     android:orientation="vertical">
 
 
@@ -11,13 +12,13 @@
         android:id="@+id/cardview_recycler_layout_openweather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#99000000"
+        app:cardBackgroundColor="#CCA5D5C6"
         app:cardCornerRadius="7dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp">
+            android:paddingLeft="15dp">
 
             <TextView
                 android:id="@+id/textview_recycler_layout_openweather_weather_description"
@@ -27,10 +28,10 @@
                 android:text="scattered clouds"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textview_recycler_layout_openweather_weather_mintemp"
+                app:layout_constraintStart_toEndOf="@+id/textview_recycler_layout_openweather_unit"
                 app:layout_constraintTop_toBottomOf="@+id/textview_recycler_layout_openweather_timestamp" />
 
             <TextView
@@ -40,7 +41,7 @@
                 android:text="ºC"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textview_recycler_layout_openweather_temp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +53,7 @@
                 android:text="22"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +77,7 @@
                 android:src="@drawable/ic_menu_gallery"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_recycler_layout_openweather_timestamp" />
 
             <TextView
                 android:id="@+id/textview_recycler_layout_openweather_weather_maxtemp"
@@ -85,8 +86,9 @@
                 android:text="22"
                 android:textColor="#FF0000"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgview_recycler_layout_openweather_icon" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgview_recycler_layout_openweather_icon"
+                app:layout_constraintTop_toBottomOf="@+id/textview_recycler_layout_openweather_timestamp" />
 
             <TextView
                 android:id="@+id/textview_recycler_layout_openweather_weather_separator"
@@ -95,8 +97,9 @@
                 android:text="|"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textview_recycler_layout_openweather_weather_maxtemp"
-                app:layout_constraintTop_toBottomOf="@+id/imgview_recycler_layout_openweather_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_recycler_layout_openweather_timestamp" />
 
             <TextView
                 android:id="@+id/textview_recycler_layout_openweather_weather_mintemp"
@@ -105,8 +108,9 @@
                 android:text="22"
                 android:textColor="#0096FF"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textview_recycler_layout_openweather_weather_separator"
-                app:layout_constraintTop_toBottomOf="@+id/imgview_recycler_layout_openweather_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_recycler_layout_openweather_timestamp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

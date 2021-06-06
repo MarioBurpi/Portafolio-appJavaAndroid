@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="CustomActionBarTheme"
+    parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <item name="popupMenuStyle">@style/MyPopupMenu</item>
+    <item name="itemTextAppearance">@style/TextAppearance</item>
+</style>
+    <!-- Popup Menu Background Color styles -->
+<style name="MyPopupMenu"
+parent="Widget.AppCompat.Light.ListPopupWindow">
+<item name="android:popupBackground">@color/red_1_theme</item>
+</style>
+    <!-- Popup Menu Text Color styles -->
+<style name="TextAppearance">
+<item name="android:textColor">@color/white</item>
+</style>
+</resources>

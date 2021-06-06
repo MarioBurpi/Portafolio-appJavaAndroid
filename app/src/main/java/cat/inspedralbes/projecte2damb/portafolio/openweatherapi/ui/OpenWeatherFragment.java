@@ -55,11 +55,6 @@ public class OpenWeatherFragment extends Fragment {
         return openweatherRecyclerViewAdapter;
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +69,12 @@ public class OpenWeatherFragment extends Fragment {
         recyclerView.setAdapter(openweatherRecyclerViewAdapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        tvCityName.setText("");
     }
 
     public void onClickFragment(View view) {
@@ -112,12 +113,9 @@ public class OpenWeatherFragment extends Fragment {
                     temperatures = parserOpenWeather.parseTemperatures();
                     city.setTemperatures(temperatures);
                     for (Temperature temp: temperatures) {
-                        Log.d(TAG, "onResponse: " + temp.toString());
                         openweatherRecyclerViewAdapter.addTemperature(temp);
                     }
-
                     getActivity().runOnUiThread(() -> openweatherRecyclerViewAdapter.notifyDataSetChanged());
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

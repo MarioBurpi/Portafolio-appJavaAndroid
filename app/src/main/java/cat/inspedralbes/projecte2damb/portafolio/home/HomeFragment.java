@@ -1,4 +1,4 @@
-package cat.inspedralbes.projecte2damb.portafolio.fragments;
+package cat.inspedralbes.projecte2damb.portafolio.home;
 
 import android.os.Bundle;
 

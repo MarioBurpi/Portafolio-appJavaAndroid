@@ -1,5 +1,7 @@
 package cat.inspedralbes.projecte2damb.portafolio.util.parser;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,23 +37,28 @@ public class ParserOpenWeather {
 
     public List<Temperature> parseTemperatures() throws JSONException {
         List<Temperature> temperatures = new ArrayList<Temperature>();
-        Temperature temperature = new Temperature();
 
         JSONObject doc = new JSONObject(json);
         JSONArray list = doc.getJSONArray("list");
         JSONObject elementList;
-
         JSONObject main;
         JSONArray weather;
 
+        int temp, tempMax, tempMin;  // (1) this will help to delete decimals when rounding temp values.
+
         for (int i = 0; i < list.length(); i++){
+            Temperature temperature = new Temperature();
             elementList = list.getJSONObject(i);
             main = elementList.getJSONObject("main");
             weather = elementList.getJSONArray("weather");
 
-            temperature.setTemp(main.getString("temp"));
-            temperature.setMaxTemp(main.getString("temp_max"));
-            temperature.setMinTemp(main.getString("temp_min"));
+            temp = (int)Double.parseDouble(main.getString("temp"));  // (1) HERE: get String, parse to Double and then cast to Integer.
+            tempMax = (int)Double.parseDouble(main.getString("temp_max"));
+            tempMin = (int)Double.parseDouble(main.getString("temp_min"));
+
+            temperature.setTemp(String.valueOf(temp)); // (1) will need String again.
+            temperature.setMaxTemp(String.valueOf(tempMax));
+            temperature.setMinTemp(String.valueOf(tempMin));
             temperature.setPressure(main.getString("pressure"));
             temperature.setHumidity(main.getString("humidity"));
             temperature.setWeatherDescription(weather.getJSONObject(0).getString("description"));
@@ -59,6 +66,7 @@ public class ParserOpenWeather {
             temperature.setTimestamp(elementList.getString("dt_txt"));
             temperatures.add(temperature);
         }
+
         return temperatures;
     }
 }

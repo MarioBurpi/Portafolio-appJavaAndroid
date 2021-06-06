@@ -105,4 +105,5 @@
     <string name="type_a_city_name">Type a city name</string>
     <string name="city_name">City name</string>
     <string name="weather_info">Weather Forecast</string>
+    <string name="openweathermap_url">https://openweathermap.org/api</string>
 </resources>

@@ -1,26 +1,29 @@
 package cat.inspedralbes.projecte2damb.portafolio;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import cat.inspedralbes.projecte2damb.portafolio.openweatherapi.ui.OpenWeatherFragment;
-import cat.inspedralbes.projecte2damb.portafolio.util.constants.Constants;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fab;
+    Toolbar toolbar;
+    TabLayout tabLayout;
+    TabItem tabOpenweather;
 
-    // Fragments
-    OpenWeatherFragment openWeatherFragment;
+    CollectionAdapter collectionAdapter;
+    ViewPager2 pager;
+    TabLayoutMediator tabLayoutMediator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +31,33 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        openWeatherFragment = new OpenWeatherFragment();
-
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(this::onClick);
+//        getSupportActionBar().hide();
 
 
-    }
+//        toolbar = findViewById(R.id.toolbar_activity_main);
+        tabLayout = findViewById(R.id.tab_layout);
+//        tabOpenweather = findViewById(R.id.tab_item_openweather);
 
-    private void onClick(View view) {
-        Snackbar.make(view,"", Snackbar.LENGTH_LONG)
-                .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
-                .setAction("ACTION", new View.OnClickListener() {
+        collectionAdapter = new CollectionAdapter(this);
+        pager = findViewById(R.id.pager_screen);
+        pager.setAdapter(collectionAdapter);
+        tabLayoutMediator = new TabLayoutMediator(tabLayout, pager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
-                    public void onClick(View v) {
-
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        switch (position+1){
+                            case 1:
+                                tab.setIcon(getResources().getDrawable(R.drawable.home_icon));
+                                break;
+                            case 2:
+                                tab.setIcon(getResources().getDrawable(R.drawable.openweather_logo));
+                                break;
+                            case 3:
+                                tab.setIcon(getResources().getDrawable(R.drawable.chat_icon));
+                                break;
+                        }
                     }
-                })
-                .show();
+                });
+        tabLayoutMediator.attach();
     }
-
 }

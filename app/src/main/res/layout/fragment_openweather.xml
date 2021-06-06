@@ -9,6 +9,15 @@
     android:padding="24dp"
     tools:context=".openweatherapi.ui.OpenWeatherFragment">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/openweathermap_url"
+        android:textColor="#03A9F4"
+        android:textStyle="italic" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +49,7 @@
 
         <ImageButton
             android:id="@+id/imgbutton_fragment_weather_search"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_circle"
             android:src="@drawable/ic_menu_send" />
@@ -49,7 +58,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2" />
+        android:layout_weight="3" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_fragment_weather"
@@ -62,6 +71,6 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2" />
+        android:layout_weight="3" />
 
 </LinearLayout>
