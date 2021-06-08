@@ -45,6 +45,7 @@ public class ParserOpenWeather {
         JSONArray weather;
 
         int temp, tempMax, tempMin;  // (1) this will help to delete decimals when rounding temp values.
+        String timestamp;
 
         for (int i = 0; i < list.length(); i++){
             Temperature temperature = new Temperature();
@@ -52,18 +53,20 @@ public class ParserOpenWeather {
             main = elementList.getJSONObject("main");
             weather = elementList.getJSONArray("weather");
 
-            temp = (int)Double.parseDouble(main.getString("temp"));  // (1) HERE: get String, parse to Double and then cast to Integer.
+            temp = (int)Double.parseDouble(main.getString("temp"));  // (1) HERE: we get a String, parse it to Double and then cast it again to Integer.
             tempMax = (int)Double.parseDouble(main.getString("temp_max"));
             tempMin = (int)Double.parseDouble(main.getString("temp_min"));
 
-            temperature.setTemp(String.valueOf(temp)); // (1) will need String again.
+            timestamp = elementList.getString("dt_txt");
+//            timestamp = timestamp.substring(11);  // if YYYY-MM-DD it's no longer required, with this line we can get only HH:MM:SS
+            temperature.setTemp(String.valueOf(temp)); // (1) we will need String value of it.
             temperature.setMaxTemp(String.valueOf(tempMax));
             temperature.setMinTemp(String.valueOf(tempMin));
             temperature.setPressure(main.getString("pressure"));
             temperature.setHumidity(main.getString("humidity"));
             temperature.setWeatherDescription(weather.getJSONObject(0).getString("description"));
             temperature.setWeatherIcon(weather.getJSONObject(0).getString("icon"));
-            temperature.setTimestamp(elementList.getString("dt_txt"));
+            temperature.setTimestamp(timestamp);
             temperatures.add(temperature);
         }
 

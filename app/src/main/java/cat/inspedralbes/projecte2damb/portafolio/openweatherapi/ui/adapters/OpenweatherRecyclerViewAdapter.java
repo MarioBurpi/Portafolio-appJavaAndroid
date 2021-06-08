@@ -53,6 +53,7 @@ public class OpenweatherRecyclerViewAdapter extends RecyclerView.Adapter<Openwea
         holder.imgIcon.setImageDrawable(context.getResources().getDrawable(imgIcon));
     }
 
+    public void setTemperatures(List<Temperature> temperatures){this.temperatures = temperatures;}
     public void addTemperature(Temperature temperature){
         temperatures.add(temperature);
     }
@@ -74,7 +75,7 @@ public class OpenweatherRecyclerViewAdapter extends RecyclerView.Adapter<Openwea
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTemperature = itemView.findViewById(R.id.textview_recycler_layout_openweather_temp);
+            tvTemperature = itemView.findViewById(R.id.textview_recycler_layout_chat_username);
             tvTimestamp = itemView.findViewById(R.id.textview_recycler_layout_openweather_timestamp);
             tvWeatherDescription = itemView.findViewById(R.id.textview_recycler_layout_openweather_weather_description);
             imgIcon = itemView.findViewById(R.id.imgview_recycler_layout_openweather_icon);

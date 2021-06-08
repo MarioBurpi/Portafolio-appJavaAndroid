@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatFragment;
+import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatLoginFragment;
+import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatRootFragment;
 import cat.inspedralbes.projecte2damb.portafolio.home.HomeFragment;
 import cat.inspedralbes.projecte2damb.portafolio.openweatherapi.ui.OpenWeatherFragment;
 import cat.inspedralbes.projecte2damb.portafolio.util.constants.Constants;
@@ -35,9 +36,9 @@ public class CollectionAdapter extends FragmentStateAdapter {
             case 2:
                 return new OpenWeatherFragment();
             case 3:
-                return new ChatFragment();
+                return new ChatRootFragment();
             default:
-                return new ChatFragment();
+                return null;
         }
     }
 

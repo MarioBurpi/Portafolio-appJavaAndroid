@@ -10,16 +10,21 @@ import android.view.ViewGroup;
 
 import cat.inspedralbes.projecte2damb.portafolio.R;
 
-public class ChatFragment extends Fragment {
+public class ChatRoomFragment extends Fragment {
 
-    public ChatFragment() {
-        // Required empty public constructor
+    String nickName;
+
+    View rootView;
+
+    public ChatRoomFragment(String nickName) {
+        this.nickName = nickName;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_chat_room, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat_login, container, false);
+        return rootView;
     }
 }

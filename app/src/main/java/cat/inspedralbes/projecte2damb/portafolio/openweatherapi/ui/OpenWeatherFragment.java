@@ -78,9 +78,10 @@ public class OpenWeatherFragment extends Fragment {
     }
 
     public void onClickFragment(View view) {
+        String cityName;
         switch (view.getId()){
             case R.id.imgbutton_fragment_weather_search:
-                String cityName = tvCityName.getText().toString();
+                cityName = tvCityName.getText().toString();
                 String url = Constants.OPENWEATHER_URL + cityName + Constants.OPENWEATHER_APPID;
                 requestOpenweather(url);
                 break;
@@ -111,10 +112,9 @@ public class OpenWeatherFragment extends Fragment {
 //                    Log.d(TAG, "onResponse: " + json);
                     parserOpenWeather.setJson(json);
                     temperatures = parserOpenWeather.parseTemperatures();
+                    city = new City();
                     city.setTemperatures(temperatures);
-                    for (Temperature temp: temperatures) {
-                        openweatherRecyclerViewAdapter.addTemperature(temp);
-                    }
+                    openweatherRecyclerViewAdapter.setTemperatures(temperatures);
                     getActivity().runOnUiThread(() -> openweatherRecyclerViewAdapter.notifyDataSetChanged());
 
                 } catch (JSONException e) {

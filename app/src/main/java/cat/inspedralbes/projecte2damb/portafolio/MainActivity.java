@@ -3,6 +3,7 @@ package cat.inspedralbes.projecte2damb.portafolio;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;

@@ -4,24 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/chat_bg"
-    tools:context=".chatfirebase.ChatFragment">
+    android:background="@drawable/white_bg"
+    tools:context=".chatfirebase.ChatLoginFragment">
 
     <EditText
         android:id="@+id/edittext_fragment_chat_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="8"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="142dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@android:drawable/button_onoff_indicator_off"
+        android:ems="7"
         android:foregroundGravity="center"
         android:gravity="center"
-        android:hint="enter a nickname"
+        android:hint="@string/nickname"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColorHighlight="@color/red_1_theme"
+        android:textColorHint="#A68F8E8E"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imgbutton_chat_login_fagment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/shape_circle"
+        android:src="@drawable/selector_power_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_fragment_chat_nickname" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="207dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/logo_built_black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.807" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="128dp"
+        android:src="@drawable/realtimedb_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="40dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/storage_logo"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Mario Burgos</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -106,4 +106,8 @@
     <string name="city_name">City name</string>
     <string name="weather_info">Weather Forecast</string>
     <string name="openweathermap_url">https://openweathermap.org/api</string>
+    <string name="chat">ChatRoom</string>
+    <string name="nickname">Nickname</string>
+    <string name="message_sent">Message sent by the user</string>
+    <string name="message_received">Message received by the user</string>
 </resources>

@@ -12,8 +12,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_activity_main"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -31,8 +31,8 @@
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_item_openweather"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:icon="@drawable/openweather_logo" />
 
             <com.google.android.material.tabs.TabItem
@@ -45,14 +45,13 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager_screen"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:layout_height="match_parent">
     </androidx.core.widget.NestedScrollView>
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_screen"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
