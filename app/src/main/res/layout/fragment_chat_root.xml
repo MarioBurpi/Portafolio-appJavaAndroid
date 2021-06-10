@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_container_root_chat"
-        android:name="cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatLoginFragment"
+        android:name="cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui.ChatLoginFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

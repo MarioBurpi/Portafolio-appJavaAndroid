@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/white_bg"
-    tools:context=".chatfirebase.ChatLoginFragment">
+    tools:context=".chatfirebase.ui.ChatLoginFragment">
 
     <EditText
         android:id="@+id/edittext_fragment_chat_nickname"
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:hint="@string/nickname"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/red_3_theme"
         android:textColorHighlight="@color/red_1_theme"
         android:textColorHint="#A68F8E8E"
         android:textSize="18sp"
@@ -45,13 +45,12 @@
         android:id="@+id/imageView2"
         android:layout_width="207dp"
         android:layout_height="104dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="116dp"
         android:src="@drawable/logo_built_black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"

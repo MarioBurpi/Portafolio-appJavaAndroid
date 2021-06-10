@@ -7,8 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatLoginFragment;
-import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ChatRootFragment;
+import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui.ChatRootFragment;
 import cat.inspedralbes.projecte2damb.portafolio.home.HomeFragment;
 import cat.inspedralbes.projecte2damb.portafolio.openweatherapi.ui.OpenWeatherFragment;
 import cat.inspedralbes.projecte2damb.portafolio.util.constants.Constants;

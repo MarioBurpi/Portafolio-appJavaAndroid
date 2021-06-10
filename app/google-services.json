@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "659582254769",
+    "firebase_url": "https://portfolio-55f54-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "portfolio-55f54",
+    "storage_bucket": "portfolio-55f54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659582254769:android:0d63923546f525e5602c90",
+        "android_client_info": {
+          "package_name": "cat.inspedralbes.projecte2damb.portafolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659582254769-q9lrr2gaa2c65194laqi26jfl665s8bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtwMoGJfqKf_85pss8c67mqeYjlLWLQX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659582254769-q9lrr2gaa2c65194laqi26jfl665s8bm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

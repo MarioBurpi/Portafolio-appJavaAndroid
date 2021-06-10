@@ -1,4 +1,4 @@
-package cat.inspedralbes.projecte2damb.portafolio.chatfirebase;
+package cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui;
 
 import android.os.Bundle;
 
@@ -31,7 +31,6 @@ public class ChatLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_chat_login, container, false);
-
         btnLogin = rootView.findViewById(R.id.imgbutton_chat_login_fagment);
         btnLogin.setOnClickListener(this::onClick);
         // Inflate the layout for this fragment
@@ -39,7 +38,6 @@ public class ChatLoginFragment extends Fragment {
     }
 
     private void onClick(View view) {
-
         switch (view.getId()){
             case R.id.imgbutton_chat_login_fagment:
                 Random rand = new Random();
@@ -49,7 +47,6 @@ public class ChatLoginFragment extends Fragment {
                 if (nickName.isEmpty()){
                     nickName = "user" + rand.nextInt(999);
                 }
-
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container_root_chat, new ChatRoomFragment(nickName))
                         .commit();
