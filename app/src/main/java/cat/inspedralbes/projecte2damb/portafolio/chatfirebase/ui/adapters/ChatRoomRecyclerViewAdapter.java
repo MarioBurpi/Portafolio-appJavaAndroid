@@ -27,7 +27,7 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
     private static final String TAG = "ChatRecyclerViewAdapter";
     private final int VIEW_TYPE_SENT = 1;
     private final int VIEW_TYPE_RECEIVED = 2;
-    private final String URL_FIREBASE_STORAGE = "gs://portfolio-55f54.appspot.com/chat/";
+    private final String URL_FIREBASE_STORAGE = "gs://portfolio-55f54.appspot.com/";
 
     private String nickName;
     private List<ChatMessage> messages = new ArrayList<ChatMessage>();
@@ -70,6 +70,8 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
         ChatMessage message = messages.get(position);
         String messageContent = message.getMessage();
         String messageOwner = message.getNickName();
+        // for us to search the photo (child) it's needed to split the messageContent String
+        String[] contentSplit = messageContent.split("/");
         // This couple of conditionals will customize the view:
         // one showing our nickname in the bubble if we are the owner/sender of the message.
         // the second one, bigger, will hide the TextView if the message is photo-type and then download the data from FirebaseStorage.
@@ -77,8 +79,9 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
         if (message.getPhoto() != 0){
             holder.tvMessageContent.setVisibility(View.GONE);
             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-            StorageReference storageReference = firebaseStorage.getReferenceFromUrl(URL_FIREBASE_STORAGE + nickName.toLowerCase() + "/" + 0);
-            final long SIZE = 1024*1024;
+            Log.d(TAG, "onBindViewHolder: " + URL_FIREBASE_STORAGE + contentSplit[0]+ contentSplit[1]);
+            StorageReference storageReference = firebaseStorage.getReferenceFromUrl(URL_FIREBASE_STORAGE).child(contentSplit[0]).child(contentSplit[1]);
+            final long SIZE = 2048*2048;
             storageReference.getBytes(SIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
@@ -93,6 +96,8 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
         holder.tvNicknameContent.setText(messageOwner);
 
     }
+
+    public List<ChatMessage> getMessages(){return messages;}
 
     @Override
     public int getItemCount() {

@@ -1,16 +1,12 @@
 package cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui;
 
 import android.app.Activity;
+import android.app.usage.NetworkStats;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,8 +22,6 @@ import android.widget.ImageButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import cat.inspedralbes.projecte2damb.portafolio.R;
 import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.model.ChatMessage;
 import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui.adapters.ChatRoomRecyclerViewAdapter;
+import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui.adapters.CustomChildEventListener;
 import cat.inspedralbes.projecte2damb.portafolio.chatfirebase.ui.soundmanager.SoundManager;
 
 public class ChatRoomFragment extends Fragment {
@@ -46,13 +41,13 @@ public class ChatRoomFragment extends Fragment {
     private final String TAG = "**CHAT FRAGMENT::";
     private static final int REQUEST_PHOTO = 110;
 
-
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference refTextMessage;
     private ChildEventListener childEventListener;
     private FirebaseStorage firebaseStorage;
     private StorageReference refStorage;
-    private StorageReference refPhotoMessage;
+    private StorageReference refUserDirectory;
+    private StorageReference refNumberPhoto;
     int i = 0;
 
     private SoundManager soundManager;
@@ -64,18 +59,21 @@ public class ChatRoomFragment extends Fragment {
     private RecyclerView recyclerView;
     private ChatRoomRecyclerViewAdapter adapter;
 
+    private ChatMessage chatMessage;
     private String nickName;
-    private String userPathStorage;
+    private String userDirectoryPath;
+    private int userPhotoPath;
 
     public ChatRoomFragment(String nickName) {
         this.nickName = nickName;
+        i = 0;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        i = 0;
-        userPathStorage =  "img/" + nickName.toLowerCase() + "/" + i;
+        userDirectoryPath =  nickName.toLowerCase();
+
         // View instances
         rootView = inflater.inflate(R.layout.fragment_chat_room, container, false);
         etMessageBox = rootView.findViewById(R.id.edittext_chat_room_message);
@@ -88,52 +86,21 @@ public class ChatRoomFragment extends Fragment {
         adapter = new ChatRoomRecyclerViewAdapter();
         adapter.setNickname(nickName);
         recyclerView.setAdapter(adapter);
+        recyclerView.setItemViewCacheSize(adapter.getMessages().size());
         // SoundManager instance
         soundManager = new SoundManager(getContext());
         // Firebase:  RealtimeDatabase instances to handle the text messages
         firebaseDatabase = FirebaseDatabase.getInstance("https://portfolio-55f54-default-rtdb.europe-west1.firebasedatabase.app/");
-        refTextMessage = firebaseDatabase.getReference("message");
+        refTextMessage = firebaseDatabase.getReference("messages");
         refTextMessage.setValue(null);
         // Firebase:  Storage instance to handle the photo messages
-        firebaseStorage = FirebaseStorage.getInstance("gs://portfolio-55f54.appspot.com");
+        firebaseStorage = FirebaseStorage.getInstance("gs://portfolio-55f54.appspot.com/");
         refStorage = firebaseStorage.getReference();
-        refPhotoMessage = refStorage.child("img").child(nickName.toLowerCase()).child("" + i);
-
-        childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                ChatMessage message = snapshot.getValue(ChatMessage.class);
-                soundManager.playSound();
-                adapter.addMessage(message);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-            }
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        };
-        return rootView;
-    }
-
-    // It is important that the childEventListener is attached onStart and detached onDestroy
-    @Override
-    public void onStart() {
-        super.onStart();
+        refUserDirectory = refStorage.child(userDirectoryPath);
+        refUserDirectory.delete();
+        childEventListener = new CustomChildEventListener(chatMessage, soundManager, adapter);
         refTextMessage.addChildEventListener(childEventListener);
-    }
-//  Detach
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        refTextMessage.removeEventListener(childEventListener);
+        return rootView;
     }
 
     public void onClickSendMessage(View view){
@@ -150,41 +117,6 @@ public class ChatRoomFragment extends Fragment {
             case R.id.imgbutton_chat_room_send_photo:
                 Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intentPhoto, REQUEST_PHOTO);
-//                ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-//                        new ActivityResultContracts.StartActivityForResult(),
-//                        new ActivityResultCallback<ActivityResult>() {
-//                            @Override
-//                            public void onActivityResult(ActivityResult result) {
-//                                messageObject[0] = null;
-//                                if (result.getResultCode() == Activity.RESULT_OK){
-//                                    Intent data = result.getData();
-//                                    Bundle extras = data.getExtras();
-//                                    Bitmap img = (Bitmap) extras.get("data");
-//                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                                    img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                                    byte[] dataPhoto = baos.toByteArray();
-//                                    int hash = dataPhoto.hashCode();
-//                                    // we want to save the message at the RealtimeDatabase (the content of it will be the path to the Storage)
-//                                    messageObject[0] = new ChatMessage(nickName, userPathStorage, 1);
-//                                    refTextMessage.push().setValue(messageObject);
-//                                    // and then upload the image (Bitmap to byte[]) at the Storage
-//                                    UploadTask uploadTask = refPhotoMessage.putBytes(dataPhoto);
-//                                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                        @Override
-//                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                            Log.d(TAG, "onSuccess: PHOTO NOT UPLOADED");
-//                                        }
-//                                    });
-//                                    uploadTask.addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Log.d(TAG, "onSuccess: PHOTO UPLOADED SUCCESFULLY");
-//                                        }
-//                                    });
-//                                }
-//                            }
-//                        }
-//                );
                 break;
         }
     }
@@ -201,11 +133,12 @@ public class ChatRoomFragment extends Fragment {
             img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] dataPhoto = baos.toByteArray();
             int hash = dataPhoto.hashCode();
-            // we want to save the message at the RealtimeDatabase (the content of it will be the path to the Storage)
-            messageObject = new ChatMessage(nickName, userPathStorage, 1);
+            // we want to save the message at the RealtimeDatabase (the message content will be the path to the Storage)
+            messageObject = new ChatMessage(nickName, userDirectoryPath + "/" + i, 1);
             refTextMessage.push().setValue(messageObject);
-            // and then upload the image (Bitmap to byte[]) at the Storage
-            UploadTask uploadTask = refPhotoMessage.putBytes(dataPhoto);
+            // and then upload the image at the Storage
+            refNumberPhoto = refUserDirectory.child(String.valueOf(i));
+            UploadTask uploadTask = refNumberPhoto.putBytes(dataPhoto);
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -215,9 +148,11 @@ public class ChatRoomFragment extends Fragment {
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    adapter.notifyDataSetChanged();
                     Log.d(TAG, "onSuccess: PHOTO UPLOADED SUCCESFULLY");
                 }
             });
+            i++;
         }
     }
 }
