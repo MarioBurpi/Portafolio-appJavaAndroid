@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 
 import cat.inspedralbes.projecte2damb.portafolio.R;
 
+/**
+ * This is the root fragment.  It has a fragment container that swaps Login and Room views.
+ */
 public class ChatRootFragment extends Fragment {
 
     View rootView;

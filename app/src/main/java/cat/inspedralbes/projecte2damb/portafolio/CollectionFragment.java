@@ -16,7 +16,6 @@ import java.util.List;
 public class CollectionFragment extends Fragment {
 
     static final String TAG = "COLLECTION FRAGMENT: ";
-    List<Fragment> fragmentList;
     CollectionAdapter collectionAdapter;
     ViewPager2 viewPager;
 

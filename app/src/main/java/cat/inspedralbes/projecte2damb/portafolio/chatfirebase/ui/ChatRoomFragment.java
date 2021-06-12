@@ -62,7 +62,6 @@ public class ChatRoomFragment extends Fragment {
     private ChatMessage chatMessage;
     private String nickName;
     private String userDirectoryPath;
-    private int userPhotoPath;
 
     public ChatRoomFragment(String nickName) {
         this.nickName = nickName;
@@ -76,6 +75,7 @@ public class ChatRoomFragment extends Fragment {
 
         // View instances
         rootView = inflater.inflate(R.layout.fragment_chat_room, container, false);
+
         etMessageBox = rootView.findViewById(R.id.edittext_chat_room_message);
         imgButtonSendPhoto = rootView.findViewById(R.id.imgbutton_chat_room_send_photo);
         imgButtonSendPhoto.setOnClickListener(this::onClickSendMessage);

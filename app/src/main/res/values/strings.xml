@@ -110,4 +110,5 @@
     <string name="nickname">Nickname</string>
     <string name="message_sent">Message sent by the user</string>
     <string name="message_received">Message received by the user</string>
+    <string name="currency_title">Currency Calculator</string>
 </resources>
